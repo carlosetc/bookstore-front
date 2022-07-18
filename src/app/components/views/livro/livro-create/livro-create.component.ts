@@ -1,6 +1,9 @@
+import { VIRTUAL_SCROLL_STRATEGY } from '@angular/cdk/scrolling';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Livro } from '../livro.model';
+import { LivroService } from '../livro.service';
 
 @Component({
   selector: 'app-livro-create',
@@ -11,11 +14,19 @@ export class LivroCreateComponent implements OnInit {
 
   id_cat: String = '';
   
+  livro: Livro = {
+    id: '',
+    titulo: '',
+    nomeAutor: '',
+    texto: ''
+  }
+
   titulo = new FormControl("",[Validators.minLength(3)]);
   nome_autor = new FormControl("",[Validators.minLength(3)]);
   texto = new FormControl("",[Validators.minLength(10)]);
 
   constructor(
+    private service: LivroService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
@@ -25,11 +36,20 @@ export class LivroCreateComponent implements OnInit {
   }
 
   create(): void {
-    
+    this.service.create(this.livro, this.id_cat).subscribe(
+      (resposta) => {
+        this.voltar();
+        this.service.mensagem("Livro criado com sucesso");
+      },
+      err => {
+        this.voltar();
+        this.service.mensagem("Erro ao criar Livro. Tente mais tarde.");
+      }
+    );
   }
 
   cancel(): void {
-    this.router.navigate([`categorias/${this.id_cat}/livros`]);
+    this.voltar();
   }
 
   getMessage() {
@@ -46,6 +66,10 @@ export class LivroCreateComponent implements OnInit {
     }
     
     return false;
+  }
+
+  voltar(): void {
+    this.router.navigate([`categorias/${this.id_cat}/livros`]);
   }
 
 }

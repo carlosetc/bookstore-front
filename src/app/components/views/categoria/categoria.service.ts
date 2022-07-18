@@ -12,7 +12,10 @@ export class CategoriaService {
 
   baseUrl: String = environment.baseUrl;
 
-  constructor(private http: HttpClient, private _snack: MatSnackBar) { }
+  constructor(
+    private http: HttpClient,
+    private _snack: MatSnackBar
+  ) { }
 
   findAll(): Observable<Categoria[]> {
     const url = `${this.baseUrl}/categorias`;

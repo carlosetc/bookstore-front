@@ -3,19 +3,19 @@
 
     <mat-form-field class="form">
         <mat-label>Título</mat-label>
-        <input matInput [formControl]="titulo" required type="text" name="titulo" placeholder="Ex: C++ for Dummies" maxlength="100" />
+        <input matInput [(ngModel)]="livro.titulo" [formControl]="titulo" required type="text" name="titulo" placeholder="Ex: C++ for Dummies" maxlength="100" />
         <mat-error *ngIf="titulo.invalid">{{ getMessage() }}</mat-error>
     </mat-form-field>
     
     <mat-form-field class="form">
         <mat-label>Nome de Autor</mat-label>
-        <input matInput [formControl]="nome_autor" required type="text" name="nome_autor" placeholder="Ex: Foolano de Tall" maxlength="100" />
+        <input matInput [(ngModel)]="livro.nomeAutor" [formControl]="nome_autor" required type="text" name="nome_autor" placeholder="Ex: Foolano de Tall" maxlength="100" />
         <mat-error *ngIf="nome_autor.invalid">{{ getMessage() }}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="form">
         <mat-label>Texto</mat-label>
-        <textarea matInput [formControl]="texto" required name="texto" placeholder="Ex: Lorem ipsum" maxlength="2000000"></textarea>
+        <textarea matInput [(ngModel)]="livro.texto" [formControl]="texto" required name="texto" placeholder="Ex: Lorem ipsum" maxlength="2000000"></textarea>
         <mat-error *ngIf="texto.invalid">{{ getMessage() }}</mat-error>
     </mat-form-field>
 
