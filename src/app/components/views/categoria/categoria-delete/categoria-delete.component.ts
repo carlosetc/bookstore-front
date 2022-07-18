@@ -26,28 +26,28 @@ export class CategoriaDeleteComponent implements OnInit {
   }
 
   findById(): void {
-    this.service.findById(this.categoria.id!).subscribe(
-      (resposta) => {
+    this.service.findById(this.categoria.id!).subscribe({
+      next: (resposta) => {
         this.categoria = resposta;
         console.log(this.categoria);
       },
-      err => {
+      error: (e) => {
         this.router.navigate(['/categorias']);
         this.service.mensagem('Categoria não encontrada');
       }
-    );
+    });
   }
 
   delete(): void {
-    this.service.delete(this.categoria.id!).subscribe(
-      (resposta) => {
+    this.service.delete(this.categoria.id!).subscribe({
+      next: (resposta) => {
         this.router.navigate(["/categorias"]);
         this.service.mensagem("Categoria excluída com sucesso");
       },
-      err => {
+      error: (err) => {
         this.service.mensagem(err.error.error);
       }
-    );
+    });
   }
 
   cancel(): void {

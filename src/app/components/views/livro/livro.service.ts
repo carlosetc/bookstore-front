@@ -17,6 +17,16 @@ export class LivroService {
     private _snack: MatSnackBar
   ) { }
 
+  findById(id: String): Observable<Livro> {
+    const url = `${this.base_url}/livros/${id}`;
+    return this.http.get<Livro>(url);
+  }
+
+  update(livro: Livro): Observable<Livro> {
+    const url = `${this.base_url}/livros/${livro.id}`;
+    return this.http.put<Livro>(url, livro);
+  }
+
   findByCategoria(id_cat: String): Observable<Livro[]> {
     const url = `${this.base_url}/livros?id_categoria=${id_cat}`;
     return this.http.get<Livro[]>(url);

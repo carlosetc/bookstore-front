@@ -36,16 +36,16 @@ export class LivroCreateComponent implements OnInit {
   }
 
   create(): void {
-    this.service.create(this.livro, this.id_cat).subscribe(
-      (resposta) => {
+    this.service.create(this.livro, this.id_cat).subscribe({
+      next: (resposta) => {
         this.voltar();
         this.service.mensagem("Livro criado com sucesso");
       },
-      err => {
+      error: (e) => {
         this.voltar();
         this.service.mensagem("Erro ao criar Livro. Tente mais tarde.");
       }
-    );
+    });
   }
 
   cancel(): void {

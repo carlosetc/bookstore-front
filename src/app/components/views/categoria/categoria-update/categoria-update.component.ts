@@ -27,27 +27,27 @@ export class CategoriaUpdateComponent implements OnInit {
   }
 
   findById(): void {
-    this.service.findById(this.categoria.id!).subscribe(
-      (resposta) => {
+    this.service.findById(this.categoria.id!).subscribe({
+      next: (resposta) => {
         this.categoria = resposta;
       },
-      err => {
+      error: (e) => {
         this.router.navigate(['/categorias']);
         this.service.mensagem('Categoria não encontrada');
       }
-    );
+    });
   }
 
   update(): void {
-    this.service.update(this.categoria).subscribe(
-      (resposta) => {
+    this.service.update(this.categoria).subscribe({
+      next: (resposta) => {
         this.router.navigate(['/categorias']);
         this.service.mensagem('Categoria atualizada com sucesso');
       },
-      err => {
+      error: (err) => {
         this.service.mensagem(err.error.error);
       }
-    );
+    });
   }
 
   cancel(): void {
