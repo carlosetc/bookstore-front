@@ -27,6 +27,11 @@ export class LivroService {
     return this.http.put<Livro>(url, livro);
   }
 
+  delete(id: String): Observable<void> {
+    const url = `${this.base_url}/livros/${id}`;
+    return this.http.delete<void>(url);
+  }
+
   findByCategoria(id_cat: String): Observable<Livro[]> {
     const url = `${this.base_url}/livros?id_categoria=${id_cat}`;
     return this.http.get<Livro[]>(url);
