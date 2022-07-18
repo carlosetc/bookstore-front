@@ -30,6 +30,10 @@ export class CategoriaDeleteComponent implements OnInit {
       (resposta) => {
         this.categoria = resposta;
         console.log(this.categoria);
+      },
+      err => {
+        this.router.navigate(['/categorias']);
+        this.service.mensagem('Categoria não encontrada');
       }
     );
   }

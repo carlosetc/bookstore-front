@@ -30,6 +30,10 @@ export class CategoriaUpdateComponent implements OnInit {
     this.service.findById(this.categoria.id!).subscribe(
       (resposta) => {
         this.categoria = resposta;
+      },
+      err => {
+        this.router.navigate(['/categorias']);
+        this.service.mensagem('Categoria não encontrada');
       }
     );
   }
